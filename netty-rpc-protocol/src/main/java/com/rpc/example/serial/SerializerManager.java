@@ -2,7 +2,7 @@ package com.rpc.example.serial;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-public class SerialManager {
+public class SerializerManager {
     private final static ConcurrentHashMap<Byte, ISerializer> serializer = new ConcurrentHashMap<>();
 
     static {

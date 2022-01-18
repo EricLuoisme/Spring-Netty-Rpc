@@ -1,10 +1,12 @@
 package com.rpc.example.core;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
 
 @Data
+@AllArgsConstructor
 public class Header implements Serializable {
 
     /** 魔数 2-Bytes */

@@ -8,11 +8,22 @@ public enum ReqType {
 
     private byte code;
 
+
     ReqType(byte code) {
         this.code = code;
     }
 
+
     public byte getCode() {
         return code;
+    }
+
+    public static ReqType findByCode(int code) {
+        for (ReqType value : ReqType.values()) {
+            if (value.code == code) {
+                return value;
+            }
+        }
+        return null;
     }
 }
