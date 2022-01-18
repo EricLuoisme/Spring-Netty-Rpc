@@ -1,5 +1,6 @@
 package com.rpc.example;
 
+import com.rpc.example.protocol.NettyServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,6 +12,9 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 public class NettyRpcProducer {
     public static void main(String[] args) {
+        // 启动Spring容器
         SpringApplication.run(NettyRpcProducer.class, args);
+        // 启动Netty
+        new NettyServer("127.0.0.1", 8080).startNettyServer();
     }
 }

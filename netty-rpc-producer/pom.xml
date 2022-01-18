@@ -16,15 +16,20 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
+
+
     <dependencies>
+        <!-- 由于整个项目parent都是spring-boot-starter-parent, 这里需要再次引用, 并排除tomcat, 才不会启动tomcat-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>2.5.8</version>
+            <!--去除内嵌tomcat -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
