@@ -1,4 +1,4 @@
-package com.rpc.example;
+package com.rpc.example.spring.reference;
 
 import com.rpc.example.constants.ReqType;
 import com.rpc.example.constants.RpcConstants;
@@ -7,7 +7,6 @@ import com.rpc.example.core.*;
 import com.rpc.example.protocol.NettyClient;
 import io.netty.channel.DefaultEventLoop;
 import io.netty.util.concurrent.DefaultPromise;
-import jdk.jfr.Description;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,7 +17,6 @@ import java.lang.reflect.Method;
  * 使用JDK接口实现的动态代理
  * 调用特定方法时, 会协助远程RPC获取结果
  */
-@Deprecated
 @Slf4j
 @AllArgsConstructor
 public class RpcInvokerProxy implements InvocationHandler {

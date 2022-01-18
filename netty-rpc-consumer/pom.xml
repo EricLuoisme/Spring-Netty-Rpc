@@ -17,17 +17,21 @@
     </properties>
 
     <dependencies>
-        <!-- 由于整个项目parent都是spring-boot-starter-parent, 这里需要再次引用, 并排除tomcat, 才不会启动tomcat-->
+<!--        &lt;!&ndash; 由于整个项目parent都是spring-boot-starter-parent, 这里需要再次引用, 并排除tomcat, 才不会启动tomcat&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-web</artifactId>-->
+<!--            &lt;!&ndash;去除内嵌tomcat &ndash;&gt;-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.springframework.boot</groupId>-->
+<!--                    <artifactId>spring-boot-starter-tomcat</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <!--去除内嵌tomcat -->
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>

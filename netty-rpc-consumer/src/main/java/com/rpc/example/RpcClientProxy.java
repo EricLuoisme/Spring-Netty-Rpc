@@ -2,6 +2,7 @@ package com.rpc.example;
 
 import java.lang.reflect.Proxy;
 
+@Deprecated
 public class RpcClientProxy {
     public <T> T clientProxy(final Class<T> interfaceClazz, final String host, int port) {
         return (T) Proxy.newProxyInstance(interfaceClazz.getClassLoader(),

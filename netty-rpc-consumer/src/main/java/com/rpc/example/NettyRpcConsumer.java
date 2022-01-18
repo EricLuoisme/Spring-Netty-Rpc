@@ -1,5 +1,6 @@
 package com.rpc.example;
 
+@Deprecated
 public class NettyRpcConsumer {
 
     public static void main(String[] args) {
