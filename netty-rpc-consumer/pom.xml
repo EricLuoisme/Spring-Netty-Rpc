@@ -34,5 +34,9 @@
             <groupId>org.example</groupId>
             <artifactId>netty-rpc-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>netty-rpc-protocol</artifactId>
+        </dependency>
     </dependencies>
 </project>

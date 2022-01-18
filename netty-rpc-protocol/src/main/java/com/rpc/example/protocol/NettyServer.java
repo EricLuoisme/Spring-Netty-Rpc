@@ -18,9 +18,9 @@ public class NettyServer {
     private String serverAddress;
     private int serverPort;
 
-
+    // 启动调用
     public void startNettyServer() {
-        log.info("Begin Start Netty-Server");
+        log.info("==========================Begin Starting Netty-Server=======================");
         EventLoopGroup boss = new NioEventLoopGroup();
         EventLoopGroup workers = new NioEventLoopGroup();
 

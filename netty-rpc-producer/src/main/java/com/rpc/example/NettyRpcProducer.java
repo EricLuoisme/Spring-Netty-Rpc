@@ -14,7 +14,7 @@ public class NettyRpcProducer {
     public static void main(String[] args) {
         // 启动Spring容器
         SpringApplication.run(NettyRpcProducer.class, args);
-        // 启动Netty
+        // 启动自定义的Netty
         new NettyServer("127.0.0.1", 8080).startNettyServer();
     }
 }
