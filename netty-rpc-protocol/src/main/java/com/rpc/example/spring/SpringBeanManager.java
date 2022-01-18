@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * 构造一个可以获取Bean实例的方式, 后续可以反射调用
  */
+@Deprecated
 @Component
 public class SpringBeanManager implements ApplicationContextAware {
 

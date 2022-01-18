@@ -6,6 +6,7 @@ import com.rpc.example.core.RpcProtocol;
 import com.rpc.example.core.RpcRequest;
 import com.rpc.example.core.RpcResponse;
 import com.rpc.example.spring.SpringBeanManager;
+import com.rpc.example.spring.service.Mediator;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -21,8 +22,11 @@ public class RpcServerHandler extends SimpleChannelInboundHandler<RpcProtocol<Rp
         RpcProtocol<RpcResponse> resProtocol = new RpcProtocol<>();
         Header header = msg.getHeader();
         header.setReqType(ReqType.RESPONSE.getCode());
+
         // 通过反射等, 调用并得到结果
-        Object result = invoke(msg.getContent());
+        Object result = Mediator.getInstance().processor(msg.getContent());
+//        Object result = invoke(msg.getContent());
+
         resProtocol.setHeader(header);
         // 组装Response
         RpcResponse resp = new RpcResponse();
@@ -39,6 +43,7 @@ public class RpcServerHandler extends SimpleChannelInboundHandler<RpcProtocol<Rp
      * 2. 根据类对象名称, 从ApplicationContext获取它的一个实例
      * 3. 再根据方法名称, 以及这个实例, 进行具体方法的反射调用
      */
+    @Deprecated
     private Object invoke(RpcRequest request) {
         try {
             Class<?> aClass = Class.forName(request.getClassName());
