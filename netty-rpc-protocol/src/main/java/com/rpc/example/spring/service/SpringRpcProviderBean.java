@@ -1,5 +1,7 @@
 package com.rpc.example.spring.service;
 
+import com.rpc.example.IRegistryService;
+import com.rpc.example.ServiceInfo;
 import com.rpc.example.annotation.RpcRemoteService;
 import com.rpc.example.protocol.NettyServer;
 import lombok.extern.slf4j.Slf4j;
@@ -21,12 +23,23 @@ public class SpringRpcProviderBean implements InitializingBean, BeanPostProcesso
     private final String serverAddress;
     private final int serverPort;
 
+    // 服务注册用
+    private final IRegistryService registryService;
 
-    public SpringRpcProviderBean(int serverPort) throws UnknownHostException {
+
+//    public SpringRpcProviderBean(int serverPort) throws UnknownHostException {
+//        String hostAddress = InetAddress.getLocalHost().getHostAddress();
+//        log.info("------------ The Ip for this Server is " + hostAddress + " -------------------");
+//        this.serverAddress = hostAddress;
+//        this.serverPort = serverPort;
+//    }
+
+    public SpringRpcProviderBean(int serverPort, IRegistryService registryService) throws UnknownHostException {
         String hostAddress = InetAddress.getLocalHost().getHostAddress();
         log.info("------------ The Ip for this Server is " + hostAddress + " -------------------");
         this.serverAddress = hostAddress;
         this.serverPort = serverPort;
+        this.registryService = registryService;
     }
 
 
@@ -44,12 +57,20 @@ public class SpringRpcProviderBean implements InitializingBean, BeanPostProcesso
         if (bean.getClass().isAnnotationPresent(RpcRemoteService.class)) {
             Method[] declaredMethods = bean.getClass().getDeclaredMethods();
             for (Method declaredMethod : declaredMethods) {
+                String serviceName = bean.getClass().getInterfaces()[0].getName();
                 String key = bean.getClass().getInterfaces()[0].getName() + "." + declaredMethod.getName();
                 BeanMethod bm = new BeanMethod();
                 bm.setBean(bean);
                 bm.setMethod(declaredMethod);
                 // 将这些方法和其对象实例保存
                 Mediator.beanMethodMap.put(key, bm);
+
+                // 服务注册到注册中心上
+                ServiceInfo serviceInfo = new ServiceInfo();
+                serviceInfo.setServiceAddress(this.serverAddress);
+                serviceInfo.setServicePort(this.serverPort);
+                serviceInfo.setServiceName(serviceName);
+                registryService.register(serviceInfo);
             }
         }
         return bean;
