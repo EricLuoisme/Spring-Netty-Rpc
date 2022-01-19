@@ -83,8 +83,12 @@ public class SpringRpcReferencePostProcessor implements ApplicationContextAware,
             // 这里调用init方法是重点, 因为就会调用反射一个Proxy, 后续Bean被调用的时候, 也就是被调用了这个Proxy
             builder.setInitMethodName("init");
             builder.addPropertyValue("interfaceClass", field.getType());
-            builder.addPropertyValue("serviceAddress", clientProperties.getServiceAddress());
-            builder.addPropertyValue("servicePort", clientProperties.getServicePort());
+//            builder.addPropertyValue("serviceAddress", clientProperties.getServiceAddress());
+//            builder.addPropertyValue("servicePort", clientProperties.getServicePort());
+
+            builder.addPropertyValue("registryAddress", clientProperties.getRegistryAddress());
+            builder.addPropertyValue("registryType", clientProperties.getRegistryType());
+
             BeanDefinition beanDefinition = builder.getBeanDefinition();
             rpcRefBeanDefinition.put(field.getName(), beanDefinition);
         }

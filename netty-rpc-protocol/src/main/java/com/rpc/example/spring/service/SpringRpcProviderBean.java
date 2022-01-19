@@ -51,6 +51,11 @@ public class SpringRpcProviderBean implements InitializingBean, BeanPostProcesso
                 .start();
     }
 
+    /**
+     * 动态代理, 服务注册, 其Spring容器内的切入点,
+     * 每个Bean初始化方法调用后, 都会被回调,
+     * 对所有需要处理额外处理bean的操作, 都可用用这个作为切入点
+     */
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         // 只要Bean声明了该注解, 就需要把服务发布

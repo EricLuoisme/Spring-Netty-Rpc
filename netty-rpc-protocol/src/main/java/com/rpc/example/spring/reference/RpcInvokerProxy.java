@@ -1,5 +1,6 @@
 package com.rpc.example.spring.reference;
 
+import com.rpc.example.IRegistryService;
 import com.rpc.example.constants.ReqType;
 import com.rpc.example.constants.RpcConstants;
 import com.rpc.example.constants.SerialType;
@@ -21,8 +22,8 @@ import java.lang.reflect.Method;
 @AllArgsConstructor
 public class RpcInvokerProxy implements InvocationHandler {
 
-    private String host;
-    private int port;
+    IRegistryService registryService;
+
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -44,12 +45,12 @@ public class RpcInvokerProxy implements InvocationHandler {
         reqProtocol.setContent(req);
 
         // 进行发送
-        NettyClient client = new NettyClient(host, port);
+        NettyClient client = new NettyClient();
         // 由于Netty请求与响应都是异步的, 这里使用Netty实现的Future, 轮询获取结果
         RpcFuture<RpcResponse> future = new RpcFuture<>(new DefaultPromise<>(new DefaultEventLoop()));
         // 提前将reqId和可能返回的future进行绑定, 放入map中
         ReqHolder.REQUEST_MAP.put(reqId, future);
-        client.sendRequest(reqProtocol);
+        client.sendRequest(reqProtocol, registryService);
         // get也就是同步阻塞, 直到它有值
         return future.getPromise()
                 .get().getData();

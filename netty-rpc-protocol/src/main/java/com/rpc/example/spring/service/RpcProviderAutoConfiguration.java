@@ -21,6 +21,7 @@ public class RpcProviderAutoConfiguration {
     public SpringRpcProviderBean springRpcProviderBean(RpcServerProperties properties) throws UnknownHostException {
 //        return new SpringRpcProviderBean(properties.getServicePort());
 
+        // 调用注册服务, 获取内容
         IRegistryService registryService = RegistryFactory.createRegistryService(properties.getRegistryAddress(),
                 RegistryType.findByCode(properties.getRegistryType()));
         return new SpringRpcProviderBean(properties.getServicePort(), registryService);
