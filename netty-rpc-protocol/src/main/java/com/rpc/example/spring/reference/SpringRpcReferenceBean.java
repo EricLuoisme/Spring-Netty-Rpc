@@ -17,7 +17,9 @@ public class SpringRpcReferenceBean implements FactoryBean<Object> {
     private String registryAddress;
     private byte registryType;
 
-
+    /**
+     * 在 SpringRpcReferencePostProcessor 中通过反射设置为init方法
+     */
     public void init() {
         IRegistryService registryService = RegistryFactory.createRegistryService(
                 this.registryAddress, RegistryType.findByCode(this.registryType));
