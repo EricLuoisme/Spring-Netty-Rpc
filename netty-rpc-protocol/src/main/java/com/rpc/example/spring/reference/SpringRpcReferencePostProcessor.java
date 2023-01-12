@@ -20,6 +20,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * 遍历Bean进行Bean定制化操作的重要类
+ *
  * ApplicationContextAware: 获取ApplicationContext上下文信息
  * BeanClassLoaderAware: 获取Bean的类装载器
  * BeanFactoryPostProcessor: Bean实例化前执行 (才能替换为代理)

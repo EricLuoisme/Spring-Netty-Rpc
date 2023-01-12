@@ -14,6 +14,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
+ * 遍历Bean上注解的重要实现类
+ *
  * 通过接入Spring多个自动接口, 进行触发
  * 最主要是将开放RPC的Bean, 及其Method进行绑定, 在此提前放入Map, 与Spring容器的Bean处理手法类似
  */
