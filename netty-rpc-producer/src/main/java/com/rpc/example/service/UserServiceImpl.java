@@ -14,4 +14,8 @@ public class UserServiceImpl implements IUserService {
         log.info("begin save user:{}", name);
         return "save user success " + name;
     }
+
+    private void testForDeclaringFromReflection() {
+        String s = "test";
+    }
 }
