@@ -10,12 +10,13 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
  * 遍历Bean上注解的重要实现类
- *
+ * <p>
  * 通过接入Spring多个自动接口, 进行触发
  * 最主要是将开放RPC的Bean, 及其Method进行绑定, 在此提前放入Map, 与Spring容器的Bean处理手法类似
  */
@@ -64,6 +65,9 @@ public class SpringRpcProviderBean implements InitializingBean, BeanPostProcesso
         if (bean.getClass().isAnnotationPresent(RpcRemoteService.class)) {
             Method[] declaredMethods = bean.getClass().getDeclaredMethods();
             for (Method declaredMethod : declaredMethods) {
+                if ("private".equalsIgnoreCase(Modifier.toString(declaredMethod.getModifiers()))) {
+                    continue;
+                }
                 String serviceName = bean.getClass().getInterfaces()[0].getName();
                 String key = bean.getClass().getInterfaces()[0].getName() + "." + declaredMethod.getName();
                 BeanMethod bm = new BeanMethod();
