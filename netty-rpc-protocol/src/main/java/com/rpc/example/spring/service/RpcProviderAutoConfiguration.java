@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import java.net.UnknownHostException;
 
 /**
- * 由Server端扫描该路径下Bean触发
+ * 由Server端扫描该路径下Bean触发(也可以在spring.factories里面将org.springframework....enableConfiguration=具体类路径, 进行触发扫描)
  * 其中EnableConfigurationProperties触发扫描Server端的配置文件获取开放端口
  */
 @Configuration

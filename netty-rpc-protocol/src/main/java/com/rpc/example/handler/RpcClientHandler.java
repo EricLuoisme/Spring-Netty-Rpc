@@ -10,6 +10,9 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.concurrent.EventExecutorGroup;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 可以仅处理某种类型 (从RpcDecoder中decode完毕的类型) 的handler
+ */
 @Slf4j
 public class RpcClientHandler extends SimpleChannelInboundHandler<RpcProtocol<RpcResponse>> {
     @Override

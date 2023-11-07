@@ -22,6 +22,11 @@ import java.util.List;
 @Slf4j
 public class RpcDecoder extends ByteToMessageDecoder {
 
+    /**
+     * Decoder 可以进行2种区分,
+     * 区分目前decode的是Request还是Response, 因为2者结构可能不同, 后续decode完毕是
+     * RpcRequest & RpcResponse 两种, add到out中让后续handler处理
+     */
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
         log.info("============begin RpcDecoder==========");
