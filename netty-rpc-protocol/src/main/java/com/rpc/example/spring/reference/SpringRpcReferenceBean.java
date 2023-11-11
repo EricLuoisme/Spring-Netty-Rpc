@@ -7,6 +7,10 @@ import org.springframework.beans.factory.FactoryBean;
 
 import java.lang.reflect.Proxy;
 
+/**
+ * 通过一个自定义且实现FactoryBean的
+ * 因为注册到Nacos等服务注册中心操作需要其他bean准备好, 所以将其逻辑放到init()方法, bean实例化并完成DI后, 才会调用
+ */
 public class SpringRpcReferenceBean implements FactoryBean<Object> {
 
     private Object obj;
