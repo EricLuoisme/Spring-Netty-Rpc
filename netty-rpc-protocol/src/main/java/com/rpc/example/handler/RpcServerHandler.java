@@ -7,15 +7,18 @@ import com.rpc.example.core.RpcRequest;
 import com.rpc.example.core.RpcResponse;
 import com.rpc.example.spring.SpringBeanManager;
 import com.rpc.example.spring.service.Mediator;
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.util.concurrent.EventExecutorGroup;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * 继承SimpleChannelInboundHandler<某个类型>是指对这种类型的Msg进行处理
+ * - 进入ChannelInboundHandlerAdapter可以发现, Handler之间是通过ChannelHandlerContext进行传递的
+ */
 public class RpcServerHandler extends SimpleChannelInboundHandler<RpcProtocol<RpcRequest>> {
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RpcProtocol<RpcRequest> msg) throws Exception {
         // 组装返回报文
