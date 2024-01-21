@@ -30,7 +30,9 @@ public class NettyServer {
                 .childHandler(new RpcServerInitializer());
 
         try {
-            ChannelFuture future = bootstrap.bind(this.serverAddress, this.serverPort).sync();
+            ChannelFuture future = bootstrap.bind(this.serverAddress, this.serverPort)
+                    .sync();
+
             log.info("Netty-Server started successfully on port:" + this.serverPort);
             // 同步等待客户端关闭
             future.channel().closeFuture().sync();

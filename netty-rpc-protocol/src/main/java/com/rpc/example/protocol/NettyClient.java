@@ -50,7 +50,10 @@ public class NettyClient {
             // 询问注册中心, 获取服务地址
             ServiceInfo serviceInfo = registryService.discovery(protocol.getContent().getClassName());
             // 建立连接, 需要同步等待
-            ChannelFuture future = bootstrap.connect(serviceInfo.getServiceAddress(), serviceInfo.getServicePort()).sync();
+            ChannelFuture future = bootstrap.connect(
+                            serviceInfo.getServiceAddress(), serviceInfo.getServicePort())
+                    .sync();
+
             future.addListener(listener -> {
                 if (future.isSuccess()) {
                     log.info("Connect Netty-Server successfully");
